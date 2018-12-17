@@ -1,0 +1,104 @@
+AllCops:
+  TargetRubyVersion: 2.3
+
+Layout/AlignHash:
+  Enabled: true
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle:      table
+
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: false
+
+Layout/SpaceAroundBlockParameters:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
+Lint/MissingCopEnableDirective:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
+Style/StabbyLambdaParentheses:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/DocumentationMethod:
+  Enabled: false
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+
+Style/ModuleFunction:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/RescueStandardError:
+  Enabled: false
+
+Layout/ClosingHeredocIndentation:
+  Enabled: false
+
+Layout/IndentHeredoc:
+  Enabled: false
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Layout/SpaceInLambdaLiteral:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 160
+  AllowURI: true
+
+Metrics/MethodLength:
+  Max: 30
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*_spec.rb'
+    - 'config/routes.rb'
+
+Naming/UncommunicativeMethodParamName:
+  Enabled: false

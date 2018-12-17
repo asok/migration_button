@@ -1,0 +1,7 @@
+<%= render layout: "output", locals: {output: @output} do %>
+  <% if MigrationButton::Middleware.last_request %>
+    <div id="resume-button">
+      <%= button_to(MigrationButton::Middleware.resume_button_label, "/migration_button/resume") %>
+    </div>
+  <% end %>
+<% end %>

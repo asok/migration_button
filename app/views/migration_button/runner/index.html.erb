@@ -1,0 +1,70 @@
+<% if @page.migrations.any?(&:down?) %>
+  <header class="pending heading">
+    <h1>
+      <span>
+        There are pending migrations
+      </span>
+    </h1>
+  </header>
+<% else %>
+  <header class="no-pending heading">
+    <h1>
+      There are no pending migrations
+      <% if @page.last_request %>
+        <%= button_to "Resume", @page.last_request.fullpath, method: @page.last_request.request_method.downcase.intern, form_class: "button-form", class: "up-btn", params: @page.last_request.params %>
+      <% end %>
+    </h1>
+  </header>
+<% end %>
+
+<header class="heading">
+  <h2>
+    Migrations status
+  </h2>
+</header>
+
+<div class="flex-grid">
+  <div class="col">
+    <table id="migrations-table">
+      <thead>
+        <th>State</th>
+        <th>Version</th>
+        <th>Name</th>
+        <th>
+          <% if @page.migrations.any?(&:down?) %>
+            <%= button_to "Migrate all", "#{MigrationButton.mount_path}/migrate", method: "post", form_class: "button-form", class: "up-btn" %>
+          <% end %>
+        </th>
+      </thead>
+      <tbody>
+        <% if @page.migrations.empty? %>
+          <tr><td class="padded" colspan="4">No migrations</td></tr>
+        <% else %>
+          <% @page.migrations.each do |migration| %>
+            <tr class="status-row">
+              <td class="padded"><%= migration.state %></td>
+              <td class="padded"><%= migration.version %></td>
+              <td class="padded"><%= migration.name %></td>
+              <td class="padded">
+                <% if migration.runnable? %>
+                  <% if migration.down? %>
+                    <%= button_to "Up", "#{MigrationButton.mount_path}/up/#{migration.version}", method: "post", form_class: "button-form", class: "up-btn" %>
+                  <% else %>
+                    <%= button_to "Down", "#{MigrationButton.mount_path}/down/#{migration.version}", method: "post", form_class: "button-form", class: "down-btn" %>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+
+    <div id="migrator-output" style="display: <%= @page.output.nil? ? 'none' : 'block' %>">
+      <%= render "output_pane", output: @page.output %>
+    </div>
+  </div>
+</div>

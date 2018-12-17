@@ -1,0 +1,5 @@
+<%= render layout: "output", locals: {output: @output, version: 'all'} do %>
+  <% if MigrationButton::Middleware.last_request %>
+    document.getElementById("resume-button").innerHTML = "<%= escape_javascript button_to(MigrationButton::Middleware.resume_button_label, "/migration_button/resume") %>"
+  <% end %>
+<% end %>

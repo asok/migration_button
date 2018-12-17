@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Migration button</title>
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag    "migration_button/application", media: "all" %>
+  <%= javascript_include_tag "migration_button/application" %>
+
+  <style>
+   header.pending {
+     color: #F0F0F0;
+     background: #C52F24;
+   }
+
+   header.no-pending {
+     color: #F0F0F0;
+     background: #00bfff;
+   }
+
+   .heading {
+     padding: 0.01em 1.5em;
+   }
+
+   .flex-grid {
+     display: flex;
+   }
+
+   .col {
+     flex: 1;
+   }
+
+   .up-btn {
+     background: #F0F0F0;
+     color: #00bfff;
+     font-weight: 800;
+     padding:5px 15px;
+     border:0 none;
+     cursor:pointer;
+     -webkit-border-radius: 5px;
+     border-radius: 5px;
+   }
+
+   .down-btn {
+     background: #D9D9D9;
+     color: #C52F24;
+     font-weight: 800;
+     padding:5px 15px;
+     border:0 none;
+     cursor:pointer;
+     -webkit-border-radius: 5px;
+     border-radius: 5px;
+   }
+
+   .button-form {
+     display: inline;
+   }
+
+   .output_pane * {
+     margin: 0px;
+     padding: 0px;
+   }
+
+   .output_pane {
+     border: 1px solid #D9D9D9;
+     background: #ECECEC;
+     height: 100%;
+   }
+
+   .output_pane .toggle {
+     padding: 10px;
+   }
+
+   .output_pane .output {
+     font-size: 80%;
+     overflow: auto;
+     background-color: #FFF;
+     padding: 1em;
+     height: 100%;
+   }
+
+   #migrator-output {
+     height: 100%;
+   }
+
+   #migrations-table th {
+     padding: 1em 0;
+   }
+
+   #migrations-table thead {
+     background-color: #ddd;
+   }
+
+   #migrations-table {
+     border-collapse: collapse;
+     border-spacing: 0;
+     width: 100%;
+   }
+
+   #migrations-table tbody tr.status-row {
+     border-top: 1px solid #ddd;
+   }
+
+   #migrations-table tbody tr:nth-child(odd) {
+     background: #f2f2f2;
+   }
+
+   #migrations-table td.padded {
+     padding: 4px 30px;
+   }
+
+   #migrations-table tr.output-row td {
+     /* display: table; */
+     border: none;
+   }
+
+   #migrations-table tr.status-row td {
+     border: none;
+   }
+
+   #migrations-table .output_pane {
+     border: none;
+     background: #f2f2f2;
+   }
+  </style>
+
+  <script>
+   var toggle = function(id) {
+     var s = document.getElementById(id).style;
+     s.display = s.display == 'none' ? 'block' : 'none';
+     return false;
+   }
+  </script>
+</head>
+<body data-turbolinks="false">
+
+<%= yield %>
+
+</body>
+</html>
