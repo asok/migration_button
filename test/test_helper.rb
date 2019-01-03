@@ -11,6 +11,7 @@ Rails.application.config.active_record.maintain_test_schema = false
 
 require "rails/test_help"
 require 'capybara/rails'
+require 'capybara-screenshot/minitest'
 
 # Filter out Minitest backtrace while allowing backtrace from other libraries
 # to be shown.
@@ -20,19 +21,21 @@ module MigrationButton
   module TestHelper
     extend ActiveSupport::Concern
 
-    def base_version
-      20181227053627 # rubocop:disable Style/NumericLiterals
+    cattr_accessor :last_version
+
+    def gen_new_version
+      self.last_version ||= Time.now.utc.strftime("%Y%m%d%H%M%S").to_i
+      self.last_version += 1
     end
 
     def create_migration
-      version = (@last_version || base_version) + 1
-      index = (version - base_version).abs
+      version = gen_new_version
 
-      File.open(Rails.root.join("db/migrate/#{version}_foo_#{index}.rb"), "w") do |f|
-        f.write("class Foo#{index} < ActiveRecord::Migration[5.2];end")
+      File.open(Rails.root.join("db/migrate/#{version}_foo_#{version}.rb"), "w") do |f|
+        f.write("class Foo#{version} < ActiveRecord::Migration[5.2];end")
       end
 
-      @last_version = version
+      version
     end
 
     def migration_context
@@ -64,16 +67,12 @@ module MigrationButton
 
   class SystemTest < ActionDispatch::SystemTestCase
     include TestHelper
+    include Capybara::Screenshot::MiniTestPlugin
 
     # Make the Capybara DSL available in all integration tests
     include Capybara::DSL
     # Make `assert_*` methods behave like Minitest assertions
     include Capybara::Minitest::Assertions
-
-    teardown do
-      Capybara.reset_sessions!
-      Capybara.use_default_driver
-    end
   end
 
   class TestCase < ActiveSupport::TestCase

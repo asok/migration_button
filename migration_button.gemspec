@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "capybara"
+  spec.add_development_dependency "capybara-screenshot"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "poltergeist"
 end

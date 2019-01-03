@@ -60,6 +60,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (>= 2.0, < 4.0)
+    capybara-screenshot (1.0.22)
+      capybara (>= 1.0, < 4)
+      launchy
     cliver (0.3.2)
     coderay (1.1.2)
     concurrent-ruby (1.1.4)
@@ -69,6 +72,8 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.2.0)
       concurrent-ruby (~> 1.0)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -144,6 +149,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   capybara
+  capybara-screenshot
   migration_button!
   poltergeist
   pry

@@ -10,9 +10,9 @@ class RunnerTest < MigrationButton::TestCase
 
     output = migrator.run("up", version_a)
 
-    assert_match    /#{version_a} Foo1: migrating/, output
-    assert_no_match /#{version_b} Foo2: migrating/, output
-    assert_no_match /#{version_c} Foo3: migrating/, output
+    assert_match    /#{version_a} Foo#{version_a}: migrating/, output
+    assert_no_match /#{version_b} Foo#{version_b}: migrating/, output
+    assert_no_match /#{version_c} Foo#{version_c}: migrating/, output
 
     assert migration_context.current_version == version_a
   end
@@ -25,9 +25,9 @@ class RunnerTest < MigrationButton::TestCase
     migrator.migrate
     output = migrator.run("down", version_b)
 
-    assert_no_match /#{version_a} Foo1: reverting/, output
-    assert_match    /#{version_b} Foo2: reverting/, output
-    assert_no_match /#{version_c} Foo3: reverting/, output
+    assert_no_match /#{version_a} Foo#{version_a}: reverting/, output
+    assert_match    /#{version_b} Foo#{version_b}: reverting/, output
+    assert_no_match /#{version_c} Foo#{version_c}: reverting/, output
 
     assert migration_context.current_version == version_c
   end
@@ -39,8 +39,8 @@ class RunnerTest < MigrationButton::TestCase
     migrator.migrate
 
     output = migrator.rollback
-    assert_match    /#{version_b} Foo2: reverting/, output
-    assert_no_match /#{version_a} Foo1: reverting/, output
+    assert_match    /#{version_b} Foo#{version_b}: reverting/, output
+    assert_no_match /#{version_a} Foo#{version_a}: reverting/, output
 
     assert migration_context.current_version == version_a
   end

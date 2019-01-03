@@ -10,8 +10,8 @@ class RunningMigrationsTest < MigrationButton::IntegrationTest
     post "#{MigrationButton.mount_path}/migrate"
 
     assert_response :success
-    assert_match "#{version_a} Foo1: migrated", @response.body
-    assert_match "#{version_b} Foo2: migrated", @response.body
+    assert_match "#{version_a} Foo#{version_a}: migrated", @response.body
+    assert_match "#{version_b} Foo#{version_b}: migrated", @response.body
 
     assert migration_context.current_version == version_b
   end
@@ -23,7 +23,7 @@ class RunningMigrationsTest < MigrationButton::IntegrationTest
     post "/#{MigrationButton.mount_path}/up/#{version_a}"
 
     assert_response :success
-    assert_match "#{version_a} Foo1: migrated", @response.body
+    assert_match "#{version_a} Foo#{version_a}: migrated", @response.body
     assert migration_context.current_version == version_a
   end
 
@@ -36,7 +36,7 @@ class RunningMigrationsTest < MigrationButton::IntegrationTest
     post "/#{MigrationButton.mount_path}/down/#{version_a}"
 
     assert_response :success
-    assert_match "#{version_a} Foo1: reverted", @response.body
+    assert_match "#{version_a} Foo#{version_a}: reverted", @response.body
     assert migration_context.current_version == version_b
   end
 end
