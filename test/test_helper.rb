@@ -11,6 +11,7 @@ Rails.application.config.active_record.maintain_test_schema = false
 
 require "rails/test_help"
 require 'capybara/rails'
+require 'capybara/minitest'
 require 'capybara-screenshot/minitest'
 
 # Filter out Minitest backtrace while allowing backtrace from other libraries
@@ -73,6 +74,11 @@ module MigrationButton
     include Capybara::DSL
     # Make `assert_*` methods behave like Minitest assertions
     include Capybara::Minitest::Assertions
+
+    def teardown
+      Capybara.reset_sessions!
+      Capybara.use_default_driver
+    end
   end
 
   class TestCase < ActiveSupport::TestCase

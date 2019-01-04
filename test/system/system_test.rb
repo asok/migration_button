@@ -1,9 +1,13 @@
+# frozen_string_literal: true
+
 require "test_helper"
 
 class SystemTest < MigrationButton::SystemTest
   driven_by :rack_test
 
   test "doing GET call, showing the errors page, migrating and resuming" do
+    Capybara.current_driver = :selenium_chrome
+
     version = create_migration
 
     visit "/users"
