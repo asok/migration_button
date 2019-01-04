@@ -6,7 +6,8 @@ module MigrationButton
 
     def call(env)
       case env['PATH_INFO']
-      when %r{#{MigrationButton.mount_path}}
+      when /#{MigrationButton.mount_path}/,
+           %r(\A/{0,2}#{::Rails.application.config.assets.prefix})
         @app.call env
       else
         protected_app_call(env) { super }
