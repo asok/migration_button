@@ -8,7 +8,7 @@ Rails engine for running migrations via browser.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'migration_button', github: 'asok/migration_button'
+gem 'migration_button'
 ```
 
 And then execute:
