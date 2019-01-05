@@ -34,7 +34,7 @@ $ bundle
 
 Run the tests with:
 ```bash
-$ MIGRATION_BUTTON=1 bundle exec rails test/*
+$ MIGRATION_BUTTON=1 bundle exec rails test test/*
 ```
 
 Develop -> commit -> make a pull request :sunglasses:
